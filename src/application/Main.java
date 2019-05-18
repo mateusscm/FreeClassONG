@@ -1,5 +1,6 @@
 package application;
 	
+import database.DBManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -15,10 +16,12 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			DBManager.startDatabase();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public static void main(String[] args) {
 		launch(args);
