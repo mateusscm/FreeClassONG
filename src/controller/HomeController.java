@@ -61,7 +61,7 @@ public class HomeController {
 
     @FXML
     void clickHome(ActionEvent event) {
-
+    	
     }
 
     @FXML
