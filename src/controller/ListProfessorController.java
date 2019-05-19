@@ -60,13 +60,13 @@ public class ListProfessorController {
     private AnchorPane btnHome;
 
     @FXML
-    void clickCadastrarProf(ActionEvent event) {
-
+    public void clickCadastrarProf() throws Exception {
+    	sceneChange("sceneCadProf");
     }
 
     @FXML
-    void clickAlterarProf(ActionEvent event) {
-
+    public void clickAlterarProf() throws Exception {
+    	sceneChange("sceneCadProf");
     }
 
     @FXML
