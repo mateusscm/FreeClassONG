@@ -11,7 +11,8 @@ import org.hsqldb.server.Server;
 
 public class DBManager {
 
-	private static final String URL = "hsql://localhost/freeclass";
+	private static final int PORT = 5696;
+	private static final String URL = "hsql://localhost:" + PORT + "/freeclass";
 	private static final String USER = "SA";
 	private static final String PASSWORD = "";
 	private static final String DB_NAME = "freeclass";
@@ -28,27 +29,42 @@ public class DBManager {
 			connection = getConnection();
 			statement = connection.createStatement();
 
-			statement.executeUpdate("CREATE TABLE cadastroAluno(" + 
-					"cpf INT PRIMARY KEY," + 
+			statement.executeUpdate("CREATE TABLE Aluno(" + 
+					"cpf VARCHAR(20) PRIMARY KEY," + 
 					"nome VARCHAR(50) NOT NULL," + 
 					"email VARCHAR(50)," + 
 					"nivelConhecimento VARCHAR(50)," + 
 					"telefone VARCHAR(50)," + 
 					"materia VARCHAR(50)," + 
 					"disponibilidade DATE," + 
-					"descrição VARCHAR(255)" + 
+					"descricao VARCHAR(255)" + 
 					");"
 					);
 
 		}  catch (Exception e) {
+			try {
+				AlunoDAO.delete("1111");
+				AlunoDAO.getByCpf("");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace(System.out);
 		}
 	}
 
 	public static void startDBServer() {
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+
+	        public void run() {
+	            stopDBServer();
+	        }
+	    }));
+		
 		HsqlProperties props = new HsqlProperties();
 		props.setProperty("server.database.0", "file:" + DB_LOCATION + DB_NAME  + ";");
 		props.setProperty("server.dbname.0", DB_NAME);
+		props.setProperty("server.port", PORT);
 		server = new Server();
 		try {
 			server.setProperties(props);

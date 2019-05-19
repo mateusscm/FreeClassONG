@@ -3,7 +3,7 @@ package application;
  import java.util.Date;
 
  public class Aluno {
-	private int cpf;
+	private String cpf;
 	private String nome;
 	private String email;
 	private String nivelConhecimento;
@@ -12,7 +12,7 @@ package application;
 	private Date disponibilidade;
 	private String descricao;
 
- 	public Aluno(int cpf, String nome, String email, String nivelConhecimento, String telefone, String materia, Date disponibilidade, String descricao) {
+ 	public Aluno(String cpf, String nome, String email, String nivelConhecimento, String telefone, String materia, Date disponibilidade, String descricao) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
@@ -23,14 +23,14 @@ package application;
 		this.descricao = descricao;		
 	}
 
- //	public Aluno() {
-//		Nao sei se deve ter esse construtor, so deixei ele aqui
-//	}
+	public Aluno() {
 
- 	public int getCpf() {
+	}
+
+ 	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
