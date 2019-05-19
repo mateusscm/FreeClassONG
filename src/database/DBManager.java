@@ -42,13 +42,6 @@ public class DBManager {
 					);
 
 		}  catch (Exception e) {
-			try {
-				AlunoDAO.delete("1111");
-				AlunoDAO.getByCpf("");
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			e.printStackTrace(System.out);
 		}
 	}

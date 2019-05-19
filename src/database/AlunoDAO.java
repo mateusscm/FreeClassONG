@@ -58,9 +58,9 @@ public class AlunoDAO {
 		try {
 			PreparedStatement statement;
 			connection = DBManager.getConnection();
-			String sql = "SELECT * FROM Aluno;";
+			String sql = "SELECT * FROM Aluno WHERE cpf = ?;";
 			statement = connection.prepareStatement(sql); 
-//			statement.setString(1, cpf);
+			statement.setString(1, cpf);
 			ResultSet result = statement.executeQuery();
 			IndexFactory index = null;
 			while(result.next()){
@@ -85,7 +85,7 @@ public class AlunoDAO {
 		return aluno;
 	}
 	
-	public static void delete(String cpf) {
+	public static void delete(String cpf) throws SQLException {
 		Connection connection = null;
 		try {
 			PreparedStatement statement;
@@ -94,8 +94,12 @@ public class AlunoDAO {
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, cpf);
 			statement.execute();
+			connection.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}  finally {
+			if(connection != null)
+				connection.close();
 		}
 		
 	}
