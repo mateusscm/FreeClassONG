@@ -1,7 +1,12 @@
 package controller;
 
 import static application.Main.sceneChange;
+import static database.AlunoDAO.save;
 
+import java.sql.SQLException;
+import java.util.Date;
+
+import application.Aluno;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -88,8 +93,10 @@ public class CadAlunoController {
     }
 
     @FXML
-    void clickSalvaAluno(ActionEvent event) {
-
+    void clickSalvaAluno(ActionEvent event)throws SQLException {
+    	Date a = new Date(); //Tem problema nessa variavel disponibildade aaaa 
+    	Aluno aluno = new Aluno(tfCpfAluno.getText(), tfNomeAluno.getText(), tfEmailAluno.getText(), sctConhecimentoAluno.getPromptText(), tfTelAluno.getText(), tfMatAluno.getText(), a, tfDescAluno.getText());
+    	save(aluno);
     }
 
     @FXML
