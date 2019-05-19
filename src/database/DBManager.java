@@ -29,7 +29,7 @@ public class DBManager {
 			connection = getConnection();
 			statement = connection.createStatement();
 
-			statement.executeUpdate("CREATE TABLE Aluno(" + 
+			String createAluno = "CREATE TABLE Aluno(" + 
 					"cpf VARCHAR(20) PRIMARY KEY," + 
 					"nome VARCHAR(50) NOT NULL," + 
 					"email VARCHAR(50)," + 
@@ -38,8 +38,18 @@ public class DBManager {
 					"materia VARCHAR(50)," + 
 					"disponibilidade DATE," + 
 					"descricao VARCHAR(255)" + 
-					");"
-					);
+					");";
+			String createProfessor = "CREATE TABLE Professor(" + 
+					"cpf VARCHAR(20) PRIMARY KEY," + 
+					"nome VARCHAR(50) NOT NULL," + 
+					"email VARCHAR(50)," + 
+					"nivelConhecimento VARCHAR(50)," + 
+					"telefone VARCHAR(50)," + 
+					"materia VARCHAR(50)," + 
+					"disponibilidade DATE," + 
+					"descricao VARCHAR(255)" + 
+					");";
+			statement.executeUpdate(createProfessor + createAluno);
 
 		}  catch (Exception e) {
 			e.printStackTrace(System.out);
@@ -47,13 +57,6 @@ public class DBManager {
 	}
 
 	public static void startDBServer() {
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-
-	        public void run() {
-	            stopDBServer();
-	        }
-	    }));
-		
 		HsqlProperties props = new HsqlProperties();
 		props.setProperty("server.database.0", "file:" + DB_LOCATION + DB_NAME  + ";");
 		props.setProperty("server.dbname.0", DB_NAME);

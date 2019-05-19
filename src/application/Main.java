@@ -21,7 +21,11 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-
+		
+	@Override
+	public void stop() {
+		DBManager.stopDBServer();
+	}
 	
 	public static void main(String[] args) {
 		launch(args);
