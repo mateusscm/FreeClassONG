@@ -33,7 +33,7 @@ public class Main extends Application {
 			Parent fxmlHome = FXMLLoader.load(getClass().getResource("../views/HomeScreen.fxml"));
 			sceneHome = new Scene(fxmlHome);
 			
-			palco.setTitle("IINV Bar");
+			palco.setTitle("");
 			palco.setScene(sceneHome);
 			palco.setResizable(false);
 			palco.show();
@@ -49,32 +49,32 @@ public class Main extends Application {
 	}
 	
 	public static void loadListProfessor() throws Exception{
-        Parent fxmlProf = FXMLLoader.load(Main.class.getResource("../view/ListProfessorScene.fxml"));
+        Parent fxmlProf = FXMLLoader.load(Main.class.getResource("../views/ListProfessorScene.fxml"));
         sceneListProf = new Scene(fxmlProf);
     }
 	
 	public static void loadListAluno() throws Exception{
-        Parent fxmlAluno = FXMLLoader.load(Main.class.getResource("../view/ListAlunoScene.fxml"));
+        Parent fxmlAluno = FXMLLoader.load(Main.class.getResource("../views/ListAlunoScene.fxml"));
         sceneListAluno = new Scene(fxmlAluno);
     }
 	
 	public static void loadCadProfessor() throws Exception{
-        Parent fxmlProf = FXMLLoader.load(Main.class.getResource("../view/CadProfessorScene.fxml"));
+        Parent fxmlProf = FXMLLoader.load(Main.class.getResource("../views/CadProfessorScene.fxml"));
         sceneCadProf = new Scene(fxmlProf);
     }
 	
 	public static void loadCadAluno() throws Exception{
-        Parent fxmlAluno = FXMLLoader.load(Main.class.getResource("../view/CadAlunoScene.fxml"));
+        Parent fxmlAluno = FXMLLoader.load(Main.class.getResource("../views/CadAlunoScene.fxml"));
         sceneCadAluno = new Scene(fxmlAluno);
     }
 	
 	public static void loadGerenciaAula() throws Exception{
-        Parent fxmlGerAula = FXMLLoader.load(Main.class.getResource("../view/GerenciarAulaScene.fxml"));
+        Parent fxmlGerAula = FXMLLoader.load(Main.class.getResource("../views/GerenciarAulaScene.fxml"));
         sceneGerAula = new Scene(fxmlGerAula);
     }
 	
 	public static void loadEditaAula() throws Exception{
-        Parent fxmlEditAula = FXMLLoader.load(Main.class.getResource("../view/EditAulaScene.fxml"));
+        Parent fxmlEditAula = FXMLLoader.load(Main.class.getResource("../views/EditAulaScene.fxml"));
         sceneEditAula = new Scene(fxmlEditAula);
     }
 	

@@ -1,5 +1,7 @@
 package controller;
 
+import static application.Main.sceneChange;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -73,28 +75,29 @@ public class ListAlunoController {
     }
 
     @FXML
-    void clickHome(ActionEvent event) {
-
+    public void clickHome() throws Exception {
+    	sceneChange("sceneHome");
     }
 
     @FXML
-    void clickAulas(ActionEvent event) {
-
+    public void clickAulas() throws Exception {
+    	sceneChange("sceneGerAula");
     }
 
     @FXML
-    void clickProfessores(ActionEvent event) {
+    public void clickProfessores() throws Exception {
+    	sceneChange("sceneListProf");
+    }
 
+
+    @FXML
+    public void clickAlunos() throws Exception {
+    	sceneChange("sceneListAluno");
     }
 
     @FXML
     void clickSair(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickAlunos(ActionEvent event) {
-
+    	
     }
 
 }
