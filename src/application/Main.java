@@ -4,6 +4,8 @@ import database.DBManager;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import util.ControllersManager;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -18,6 +20,7 @@ public class Main extends Application {
     private static Scene sceneCadAluno;
     private static Scene sceneGerAula;
     private static Scene sceneEditAula;
+    private Aluno aluno;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -36,6 +39,7 @@ public class Main extends Application {
 			palco.setTitle("");
 			palco.setScene(sceneHome);
 			palco.setResizable(false);
+			// palco.initStyle(StageStyle.UNDECORATED);
 			palco.show();
 			
 		} catch(Exception e) {
@@ -77,6 +81,14 @@ public class Main extends Application {
         Parent fxmlEditAula = FXMLLoader.load(Main.class.getResource("../views/EditAulaScene.fxml"));
         sceneEditAula = new Scene(fxmlEditAula);
     }
+	
+	public static void sceneChange(String cena, Object obj) throws Exception {
+		if (obj instanceof Aluno) {
+			ControllersManager.changeToAlunoStage((Aluno )obj, palco, sceneCadAluno);
+            
+		}
+		
+	}
 	
 	public static void sceneChange(String cena) throws Exception {
         switch (cena){

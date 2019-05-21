@@ -1,27 +1,49 @@
 package controller;
 
 import static application.Main.sceneChange;
+import static database.ProfessorDAO.getAll;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import application.Professor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class ListProfessorController {
 
+	public void initialize() throws SQLException {
+		ArrayList<Professor> professor = getAll();
+
+		this.colNomeProf.setCellValueFactory(new PropertyValueFactory<Professor, String>("nome"));
+    	this.colEmailProf.setCellValueFactory(new PropertyValueFactory<Professor, String>("email"));
+    	this.colTelProf.setCellValueFactory(new PropertyValueFactory<Professor, String>("telefone"));
+    	this.colConhecimentoProf.setCellValueFactory(new PropertyValueFactory<Professor, String>("conhecimento"));
+    	this.colCPFProf.setCellValueFactory(new PropertyValueFactory<Professor, String>("cpf"));
+    	this.colMateriaProf.setCellValueFactory(new PropertyValueFactory<Professor, String>("materia"));
+    	this.colDispProf.setCellValueFactory(new PropertyValueFactory<Professor, String>("disponibilidade"));
+
+    	
+    	
+    	this.tbProfessores.getItems().setAll(professor);
+		
+	}
     @FXML
-    private TableView<?> tbProfessores;
+    private TableView<Professor> tbProfessores;
 
     @FXML
-    private TableColumn<?, ?> colCPFProf;
+    private TableColumn<Professor, String>colCPFProf;
 
     @FXML
     private AnchorPane btnProfessores;
 
     @FXML
-    private TableColumn<?, ?> colDispProf;
+    private TableColumn<Professor, String>colDispProf;
 
     @FXML
     private Button btnExcluirProf;
@@ -30,31 +52,31 @@ public class ListProfessorController {
     private AnchorPane btnAulas;
 
     @FXML
-    private TableColumn<?, ?> colConhecimentoProf;
+    private TableColumn<Professor, String>colConhecimentoProf;
 
     @FXML
-    private TableColumn<?, ?> colMateriaProf;
+    private TableColumn<Professor, String>colMateriaProf;
 
     @FXML
     private Button btnCadastrarProf;
 
     @FXML
-    private AnchorPane btnAlunos;
+    private AnchorPane btnProfs;
 
     @FXML
     private AnchorPane btnSair;
 
     @FXML
-    private TableColumn<?, ?> colTelProf;
+    private TableColumn<Professor, String>colTelProf;
 
     @FXML
     private Button btnAlterarProf;
 
     @FXML
-    private TableColumn<?, ?> colNomeProf;
+    private TableColumn<Professor, String>colNomeProf;
 
     @FXML
-    private TableColumn<?, ?> colEmailProf;
+    private TableColumn<Professor, String>colEmailProf;
 
     @FXML
     private AnchorPane btnHome;

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import application.Professor;
 import util.DateUtil;
@@ -12,6 +13,38 @@ import util.IndexFactory;
 
 public class ProfessorDAO {
 
+	public static ArrayList<Professor> getAll() throws SQLException {
+		ArrayList<Professor> professor_list = new ArrayList<Professor>();
+		Connection connection = null;
+		try {
+			PreparedStatement statement;
+			connection = DBManager.getConnection();
+			String sql = "SELECT * FROM Professor;";
+			statement = connection.prepareStatement(sql); 
+			ResultSet result = statement.executeQuery();
+			IndexFactory index = null;
+			while(result.next()){
+				index = IndexFactory.newInstance(1, 8);
+				Professor professor = new Professor();
+	            professor.setCpf(result.getString(index.nextIndex()));
+	            professor.setNome(result.getString(index.nextIndex()));
+	            professor.setEmail(result.getString(index.nextIndex()));
+	            professor.setNivelConhecimento(result.getString(index.nextIndex()));
+	            professor.setTelefone(result.getString(index.nextIndex()));
+	            professor.setMateria(result.getString(index.nextIndex()));
+	            professor.setDisponibilidade(result.getDate(index.nextIndex()));
+	            professor.setDescricao(result.getString(index.nextIndex()));
+	            professor_list.add(professor); 
+	         }
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null)
+				connection.close();
+		}
+		return professor_list;
+	}
 	public static void save(Professor professor) throws SQLException {
 		Connection connection = null;
 		try {

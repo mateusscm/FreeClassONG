@@ -15,9 +15,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import util.ControllersManager;
 
 public class CadAlunoController {
-
+	
+	public void initialize() throws SQLException {
+		Aluno aluno = ControllersManager.getAluno();
+		if (aluno != null) {
+			tfCpfAluno.setText(aluno.getCpf());
+			tfNomeAluno.setText(aluno.getNome());
+			tfEmailAluno.setText(aluno.getEmail());
+			tfDescAluno.setText(aluno.getDescricao());
+			tfTelAluno.setText(aluno.getTelefone());
+			tfMatAluno.setText(aluno.getMateria());
+		}		
+	} 
     @FXML
     private Label lblEmailAluno;
 
@@ -88,13 +100,13 @@ public class CadAlunoController {
     private AnchorPane btnHome;
 
     @FXML
-    void clickCancelaAluno(ActionEvent event) {
-
+    void clickCancelaAluno() throws Exception {
+    	sceneChange("sceneListAluno");
     }
 
     @FXML
     void clickSalvaAluno(ActionEvent event)throws SQLException {
-    	Date a = new Date(); //Tem problema nessa variavel disponibildade aaaa 
+    	Date a = new Date(); 
     	Aluno aluno = new Aluno(tfCpfAluno.getText(), tfNomeAluno.getText(), tfEmailAluno.getText(), sctConhecimentoAluno.getPromptText(), tfTelAluno.getText(), tfMatAluno.getText(), a, tfDescAluno.getText());
     	save(aluno);
     }

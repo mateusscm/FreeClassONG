@@ -83,6 +83,6 @@ public class HomeController {
 
     @FXML
     void clickSair(ActionEvent event) {
-    	
+    	System.exit(0);
     }
 }

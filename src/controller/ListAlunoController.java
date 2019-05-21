@@ -1,45 +1,69 @@
 package controller;
 
 import static application.Main.sceneChange;
+import static database.AlunoDAO.getAll;
+import static database.AlunoDAO.delete;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import application.Aluno;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class ListAlunoController {
+	
+	public void initialize() throws SQLException {
+		ArrayList<Aluno> alunos = getAll();
+
+		this.colNomeAluno.setCellValueFactory(new PropertyValueFactory<Aluno, String>("nome"));
+    	this.colEmailAluno.setCellValueFactory(new PropertyValueFactory<Aluno, String>("email"));
+    	this.colTelAluno.setCellValueFactory(new PropertyValueFactory<Aluno, String>("telefone"));
+    	this.colConhecimentoAluno.setCellValueFactory(new PropertyValueFactory<Aluno, String>("conhecimento"));
+    	this.colCPFAluno.setCellValueFactory(new PropertyValueFactory<Aluno, String>("cpf"));
+    	this.colMateriaAluno.setCellValueFactory(new PropertyValueFactory<Aluno, String>("materia"));
+    	this.colDispAluno.setCellValueFactory(new PropertyValueFactory<Aluno, String>("disponibilidade"));
+
+    	
+    	
+    	this.tbAlunos.getItems().setAll(alunos);
+		
+	}
 
     @FXML
-    private TableColumn<?, ?> colEmailAluno;
+    private TableColumn<Aluno, String>colEmailAluno;
 
     @FXML
-    private TableColumn<?, ?> colTelAluno;
+    private TableColumn<Aluno, String>colTelAluno;
 
     @FXML
     private AnchorPane btnProfessores;
 
     @FXML
-    private TableView<?> tbAlunos;
+    private TableView<Aluno> tbAlunos;
 
     @FXML
     private Button btnExcluirAluno;
 
     @FXML
-    private TableColumn<?, ?> colNomeAluno;
+    private TableColumn<Aluno, String>colNomeAluno;
 
     @FXML
     private AnchorPane btnAulas;
 
     @FXML
-    private TableColumn<?, ?> colConhecimentoAluno;
+    private TableColumn<Aluno, String>colConhecimentoAluno;
 
     @FXML
-    private TableColumn<?, ?> colMateriaAluno;
+    private TableColumn<Aluno, String>colMateriaAluno;
 
     @FXML
-    private TableColumn<?, ?> colCPFAluno;
+    private TableColumn<Aluno, String>colCPFAluno;
 
     @FXML
     private Button btnCadastrarAluno;
@@ -54,7 +78,7 @@ public class ListAlunoController {
     private Button btnAlterarAluno;
 
     @FXML
-    private TableColumn<?, ?> colDispAluno;
+    private TableColumn<Aluno, String>colDispAluno;
 
     @FXML
     private AnchorPane btnHome;
@@ -66,12 +90,19 @@ public class ListAlunoController {
 
     @FXML
     public void clickAlterarProf() throws Exception {
-    	sceneChange("sceneCadAluno");
+    	int index = this.tbAlunos.getSelectionModel().getSelectedIndex();
+
+        Aluno a = tbAlunos.getItems().get(index);
+    	sceneChange("sceneCadAluno", a);
     }
 
     @FXML
-    void clickExcluirProf(ActionEvent event) {
+    void clickExcluirProf(ActionEvent event) throws SQLException {
+    	int index = this.tbAlunos.getSelectionModel().getSelectedIndex();
 
+        Aluno a = tbAlunos.getItems().get(index); 
+        delete(a.getCpf());
+        this.initialize();
     }
 
     @FXML

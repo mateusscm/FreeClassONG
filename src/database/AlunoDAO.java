@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import application.Aluno;
 import util.DateUtil;
@@ -12,6 +13,39 @@ import util.IndexFactory;
 
 public class AlunoDAO {
 
+	public static ArrayList<Aluno> getAll() throws SQLException {
+		ArrayList<Aluno> aluno_list = new ArrayList<Aluno>();
+		Connection connection = null;
+		try {
+			PreparedStatement statement;
+			connection = DBManager.getConnection();
+			String sql = "SELECT * FROM Aluno;";
+			statement = connection.prepareStatement(sql); 
+			ResultSet result = statement.executeQuery();
+			IndexFactory index = null;
+			while(result.next()){
+				index = IndexFactory.newInstance(1, 8);
+				Aluno aluno = new Aluno();
+	            aluno.setCpf(result.getString(index.nextIndex()));
+	            aluno.setNome(result.getString(index.nextIndex()));
+	            aluno.setEmail(result.getString(index.nextIndex()));
+	            aluno.setNivelConhecimento(result.getString(index.nextIndex()));
+	            aluno.setTelefone(result.getString(index.nextIndex()));
+	            aluno.setMateria(result.getString(index.nextIndex()));
+	            aluno.setDisponibilidade(result.getDate(index.nextIndex()));
+	            aluno.setDescricao(result.getString(index.nextIndex()));
+	            aluno_list.add(aluno); 
+	         }
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null)
+				connection.close();
+		}
+		return aluno_list;
+	}
+	
 	public static void save(Aluno aluno) throws SQLException {
 		Connection connection = null;
 		try {

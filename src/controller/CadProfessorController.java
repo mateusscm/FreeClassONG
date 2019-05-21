@@ -88,8 +88,8 @@ public class CadProfessorController {
     private Label lblNameProf;
 
     @FXML
-    void clickCancelaProf(ActionEvent event) {
-
+    public void clickCancelaProf() throws Exception{
+    	sceneChange("sceneListProf");
     }
 
     @FXML
