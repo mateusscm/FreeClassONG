@@ -2,6 +2,7 @@ package controller;
 
 import static application.Main.sceneChange;
 import static database.ProfessorDAO.getAll;
+import static database.ProfessorDAO.delete;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -88,12 +89,19 @@ public class ListProfessorController {
 
     @FXML
     public void clickAlterarProf() throws Exception {
-    	sceneChange("sceneCadProf");
+    	int index = this.tbProfessores.getSelectionModel().getSelectedIndex();
+    	
+		Professor a = tbProfessores.getItems().get(index);
+		sceneChange("sceneCadProf", a);
     }
 
     @FXML
-    void clickExcluirProf(ActionEvent event) {
-
+    void clickExcluirProf(ActionEvent event) throws SQLException {
+    	int index = this.tbProfessores.getSelectionModel().getSelectedIndex();
+    	
+		Professor a = tbProfessores.getItems().get(index);
+		delete(a.getCpf());
+		this.initialize();
     }
 
     @FXML

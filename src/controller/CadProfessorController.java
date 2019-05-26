@@ -15,9 +15,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import util.ControllersManager;
 
 public class CadProfessorController {
 
+	public void initialize() throws SQLException {
+		Professor p = ControllersManager.getProfessor();
+		if (p != null) {
+			tfCpfProf.setText(p.getCpf());
+			tfNomeProf.setText(p.getNome());
+			tfEmailProf.setText(p.getEmail());
+			tfDescProf.setText(p.getDescricao());
+			tfTelProf.setText(p.getTelefone());
+			tfMatProf.setText(p.getMateria());
+		}		
+	} 
+	
     @FXML
     private Button btnCancelaProf;
 
@@ -93,10 +106,11 @@ public class CadProfessorController {
     }
 
     @FXML
-    void clickSalvaProf(ActionEvent event) throws SQLException {
+    void clickSalvaProf(ActionEvent event) throws Exception {
     	Date a = new Date(); //Tem problema nessa variavel disponibildade aaaa 
     	Professor p = new Professor(tfCpfProf.getText(), tfNomeProf.getText(), tfEmailProf.getText(), sctConhecimentoProf.getPromptText(), tfTelProf.getText(), tfMatProf.getText(), a, tfDescProf.getText());
     	save(p);
+    	sceneChange("sceneListProf");
     }
 
     @FXML

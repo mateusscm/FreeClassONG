@@ -20,7 +20,6 @@ public class Main extends Application {
     private static Scene sceneCadAluno;
     private static Scene sceneGerAula;
     private static Scene sceneEditAula;
-    private Aluno aluno;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -85,6 +84,10 @@ public class Main extends Application {
 	public static void sceneChange(String cena, Object obj) throws Exception {
 		if (obj instanceof Aluno) {
 			ControllersManager.changeToAlunoStage((Aluno )obj, palco, sceneCadAluno);
+            
+		} 
+		else if (obj instanceof Professor) {
+			ControllersManager.changeToProfessorStage((Professor )obj, palco, sceneCadProf);
             
 		}
 		

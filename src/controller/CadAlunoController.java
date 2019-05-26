@@ -105,10 +105,11 @@ public class CadAlunoController {
     }
 
     @FXML
-    void clickSalvaAluno(ActionEvent event)throws SQLException {
+    void clickSalvaAluno(ActionEvent event)throws Exception {
     	Date a = new Date(); 
     	Aluno aluno = new Aluno(tfCpfAluno.getText(), tfNomeAluno.getText(), tfEmailAluno.getText(), sctConhecimentoAluno.getPromptText(), tfTelAluno.getText(), tfMatAluno.getText(), a, tfDescAluno.getText());
     	save(aluno);
+    	sceneChange("sceneListAluno");
     }
 
     @FXML
