@@ -46,6 +46,30 @@ public class AlunoDAO {
 		return aluno_list;
 	}
 	
+	public static int getCountAluno() throws SQLException {
+		int quantidade = 0;
+		Connection connection = null;
+		try {
+			PreparedStatement statement;
+			connection = DBManager.getConnection();
+			String sql = "SELECT * FROM Aluno;"; //Sei que poderia usar count, vou mudar jaja, foi mal deus o java
+			statement = connection.prepareStatement(sql); 
+			ResultSet result = statement.executeQuery();
+			while(result.next()){
+	            quantidade++;
+	             
+	         }
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null)
+				connection.close();
+		}
+		return quantidade;
+	}
+	
+	
 	public static void save(Aluno aluno) throws SQLException {
 		Connection connection = null;
 		try {

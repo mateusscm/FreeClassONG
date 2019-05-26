@@ -1,6 +1,12 @@
 package controller;
 
 import static application.Main.sceneChange;
+import static database.AlunoDAO.getCountAluno;
+import static database.ProfessorDAO.getCountProfessor;
+
+
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -9,6 +15,11 @@ import javafx.scene.layout.AnchorPane;
 
 public class HomeController {
 
+	public void initialize() throws SQLException {
+		txtNroProf.setText( Integer.toString(getCountProfessor()));
+		txtNroAluno.setText( Integer.toString(getCountAluno()));
+	}
+	
     @FXML
     private Label txtNroProf;
 
