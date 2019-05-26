@@ -16,8 +16,8 @@ import javafx.scene.layout.AnchorPane;
 public class HomeController {
 
 	public void initialize() throws SQLException {
-		txtNroProf.setText( Integer.toString(getCountProfessor()));
-		txtNroAluno.setText( Integer.toString(getCountAluno()));
+		lblNroProf.setText(Integer.toString(getCountProfessor()));
+		lblNroAlunos.setText(Integer.toString(getCountAluno()));
 	}
 	
     @FXML
