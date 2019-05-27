@@ -49,7 +49,18 @@ public class DBManager {
 					"disponibilidade DATE," + 
 					"descricao VARCHAR(255)" + 
 					");";
-			statement.executeUpdate(createProfessor + createAluno);
+			String createTurma = "CREATE TABLE Turma(" + 
+					"codigo int PRIMARY KEY," + 
+					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf)," + 
+					"materia VARCHAR(20)," +
+					"dia_da_semana VARCHAR(20)," +
+					"max_alunos int DEFAULT 40" +
+					"min_alunos int DEFAULT 20" +
+					"hora int);";
+			String createAlunoInTurma = "CREATE TABLE AlunoInTurma(" + 
+					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf)PRIMARY KEY," + 
+					"cod_turma int FOREIGN KEY REFERENCES turma(codigo);";
+			statement.executeUpdate(createProfessor + createAluno + createTurma + createAlunoInTurma);
 
 		}  catch (Exception e) {
 			e.printStackTrace(System.out);
