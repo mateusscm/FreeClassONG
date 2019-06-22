@@ -9,17 +9,16 @@ package application;
 	private String nivelConhecimento;
 	private String telefone;
 	private String materia;
-	private Date disponibilidade;
+	private Disponibilidade disponibilidade;
 	private String descricao;
 
- 	public Aluno(String cpf, String nome, String email, String nivelConhecimento, String telefone, String materia, Date disponibilidade, String descricao) {
+ 	public Aluno(String cpf, String nome, String email, String nivelConhecimento, String telefone, String materia, String descricao) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
 		this.nivelConhecimento = nivelConhecimento;
 		this.telefone = telefone;
 		this.materia = materia;
-		this.disponibilidade = disponibilidade;
 		this.descricao = descricao;		
 	}
 
@@ -76,10 +75,12 @@ package application;
 		this.descricao = descricao;
 	}
 
- 	public Date getDisponibilidade() {
+	public Disponibilidade getDisponibilidade() {
 		return disponibilidade;
 	}
-	public void setDisponibilidade(Date disponibilidade) {
+
+	public void setDisponibilidade(Disponibilidade disponibilidade) {
 		this.disponibilidade = disponibilidade;
 	}
+
 }

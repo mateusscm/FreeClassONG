@@ -36,7 +36,6 @@ public class DBManager {
 					"nivelConhecimento VARCHAR(50)," + 
 					"telefone VARCHAR(50)," + 
 					"materia VARCHAR(50)," + 
-					"disponibilidade DATE," + 
 					"descricao VARCHAR(255)" + 
 					");";
 			String createProfessor = "CREATE TABLE Professor(" + 
@@ -46,7 +45,6 @@ public class DBManager {
 					"nivelConhecimento VARCHAR(50)," + 
 					"telefone VARCHAR(50)," + 
 					"materia VARCHAR(50)," + 
-					"disponibilidade DATE," + 
 					"descricao VARCHAR(255)" + 
 					");";
 			String createTurma = "CREATE TABLE Turma(" + 
@@ -54,13 +52,35 @@ public class DBManager {
 					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf)," + 
 					"materia VARCHAR(20)," +
 					"dia_da_semana VARCHAR(20)," +
-					"max_alunos int DEFAULT 40" +
-					"min_alunos int DEFAULT 20" +
+					"max_alunos int DEFAULT 40," +
+					"min_alunos int DEFAULT 20," +
 					"hora int);";
 			String createAlunoInTurma = "CREATE TABLE AlunoInTurma(" + 
 					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf)PRIMARY KEY," + 
-					"cod_turma int FOREIGN KEY REFERENCES turma(codigo);";
-			statement.executeUpdate(createProfessor + createAluno + createTurma + createAlunoInTurma);
+					"cod_turma int FOREIGN KEY REFERENCES turma(codigo));";
+			String createDisponibilidade1 = "CREATE TABLE DisponibilidadeP(" + 
+					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf)," + 
+					"seg Boolean DEFAULT 0," +
+					"ter Boolean DEFAULT 0," +
+					"qua Boolean DEFAULT 0," +
+					"qui Boolean DEFAULT 0," +
+					"sex Boolean DEFAULT 0," +
+					"manha Boolean DEFAULT 0," +
+					"tarde Boolean DEFAULT 0," +
+					"noite Boolean DEFAULT 0);";
+			String createDisponibilidade2 = "CREATE TABLE DisponibilidadeA(" + 
+					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf)," + 
+					"seg Boolean DEFAULT 0," +
+					"ter Boolean DEFAULT 0," +
+					"qua Boolean DEFAULT 0," +
+					"qui Boolean DEFAULT 0," +
+					"sex Boolean DEFAULT 0," +
+					"manha Boolean DEFAULT 0," +
+					"tarde Boolean DEFAULT 0," +
+					"noite Boolean DEFAULT 0);";
+			String createClassLog = "CREATE TABLE ClassLog(" + 
+					"date DATE);";
+			statement.executeUpdate(createProfessor + createAluno + createDisponibilidade1 + createDisponibilidade2 +createTurma + createAlunoInTurma  + createClassLog);
 
 		}  catch (Exception e) {
 			e.printStackTrace(System.out);

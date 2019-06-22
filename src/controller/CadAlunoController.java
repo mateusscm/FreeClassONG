@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import application.Aluno;
+import application.Disponibilidade;
+import database.AulaDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -100,15 +104,41 @@ public class CadAlunoController {
     private AnchorPane btnHome;
 
     @FXML
+    private CheckBox ckSegunda;
+    
+    @FXML
+    private CheckBox ckTerca;
+
+    @FXML
+    private CheckBox ckQuarta;
+
+    @FXML
+    private CheckBox ckQuinta;
+
+    @FXML
+    private CheckBox ckSexta;
+
+    @FXML
+    private RadioButton manha;
+    
+    @FXML
+    private RadioButton tarde;
+    
+    @FXML
+    private RadioButton noite;
+    
+    @FXML
     void clickCancelaAluno() throws Exception {
     	sceneChange("sceneListAluno");
     }
 
     @FXML
     void clickSalvaAluno(ActionEvent event)throws Exception {
-    	Date a = new Date(); 
-    	Aluno aluno = new Aluno(tfCpfAluno.getText(), tfNomeAluno.getText(), tfEmailAluno.getText(), sctConhecimentoAluno.getPromptText(), tfTelAluno.getText(), tfMatAluno.getText(), a, tfDescAluno.getText());
+    	Disponibilidade d = new Disponibilidade("", tfCpfAluno.getText(),ckSegunda.isSelected(), ckTerca.isSelected(), ckQuarta.isSelected(), ckQuinta.isSelected(), ckSexta.isSelected(), manha.isSelected(), tarde.isSelected(), noite.isSelected());
+    	
+    	Aluno aluno = new Aluno(tfCpfAluno.getText(), tfNomeAluno.getText(), tfEmailAluno.getText(), sctConhecimentoAluno.getPromptText(), tfTelAluno.getText(), tfMatAluno.getText(), "");
     	save(aluno);
+    	AulaDAO.save_disp(d);
     	sceneChange("sceneListAluno");
     }
 

@@ -7,6 +7,8 @@ public class Aula {
 	private int id_aula;
 	private String materia;
 	private List<String> alunos;
+	private String dia_semana;
+	private int hora;
 	
 	public String getCpf_professor() {
 		return cpf_professor;
@@ -33,6 +35,18 @@ public class Aula {
 	}
 	public void setAlunos(List<String> alunos) {
 		this.alunos = alunos;
+	}
+	public String getDia_semana() {
+		return dia_semana;
+	}
+	public void setDia_semana(String dia_semana) {
+		this.dia_semana = dia_semana;
+	}
+	public int getHora() {
+		return hora;
+	}
+	public void setHora(int hora) {
+		this.hora = hora;
 	}
 	
 }

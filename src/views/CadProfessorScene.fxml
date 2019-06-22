@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadProfessorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadProfessorController">
    <bottom>
       <HBox prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #c1c1c1;" BorderPane.alignment="CENTER">
          <children>
@@ -50,12 +58,20 @@
                   <TextField fx:id="tfEmailProf" layoutX="64.0" layoutY="137.0" prefHeight="25.0" prefWidth="265.0" />
                   <TextField fx:id="tfMatProf" layoutX="371.0" layoutY="85.0" prefHeight="25.0" prefWidth="265.0" />
                   <TextField fx:id="tfTelProf" layoutX="371.0" layoutY="35.0" prefHeight="25.0" prefWidth="265.0" />
-                  <TextArea fx:id="tfDescProf" layoutX="372.0" layoutY="190.0" prefHeight="62.0" prefWidth="265.0" />
                   <Label fx:id="lblMatProf" layoutX="371.0" layoutY="68.0" text="Materia" />
                   <Label fx:id="lblDispProf" layoutX="371.0" layoutY="120.0" text="Disponibilidade" />
-                  <Label fx:id="lblDescProf" layoutX="371.0" layoutY="173.0" text="Descrição" />
                   <ComboBox fx:id="sctConhecimentoProf" layoutX="64.0" layoutY="190.0" prefHeight="25.0" prefWidth="265.0" />
-                  <ComboBox fx:id="sctDispProf" layoutX="371.0" layoutY="137.0" prefHeight="25.0" prefWidth="265.0" />
+                  <CheckBox fx:id="ckSegunda" layoutX="371.0" layoutY="141.0" mnemonicParsing="false" text="Segunda-feira" />
+                  <CheckBox fx:id="ckTerca" layoutX="476.0" layoutY="142.0" mnemonicParsing="false" text="Terca-feira" />
+                  <CheckBox fx:id="ckQuarta" layoutX="371.0" layoutY="165.0" mnemonicParsing="false" text="Quarta-feira" />
+                  <CheckBox fx:id="ckQuinta" layoutX="477.0" layoutY="166.0" mnemonicParsing="false" text="Quinta-feira" />
+                  <CheckBox fx:id="ckSexta" layoutX="580.0" layoutY="166.0" mnemonicParsing="false" text="Sexta-feira" />
+                  <RadioButton fx:id="manha" layoutX="383.0" layoutY="197.0" mnemonicParsing="false" text="Manha">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="a" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="tarde" layoutX="478.0" layoutY="197.0" mnemonicParsing="false" text="Tarde" toggleGroup="$a" />
+                  <RadioButton fx:id="noite" layoutX="580.0" layoutY="197.0" mnemonicParsing="false" text="Noite" toggleGroup="$a" />
                </children>
             </AnchorPane>
          </children>

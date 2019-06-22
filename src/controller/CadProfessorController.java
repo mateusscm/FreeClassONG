@@ -2,16 +2,21 @@ package controller;
 
 import static application.Main.sceneChange;
 import static database.ProfessorDAO.save;
+import database.AulaDAO;
 
+import java.awt.Checkbox;
 import java.sql.SQLException;
 import java.util.Date;
 
+import application.Disponibilidade;
 import application.Professor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +30,6 @@ public class CadProfessorController {
 			tfCpfProf.setText(p.getCpf());
 			tfNomeProf.setText(p.getNome());
 			tfEmailProf.setText(p.getEmail());
-			tfDescProf.setText(p.getDescricao());
 			tfTelProf.setText(p.getTelefone());
 			tfMatProf.setText(p.getMateria());
 		}		
@@ -99,6 +103,31 @@ public class CadProfessorController {
 
     @FXML
     private Label lblNameProf;
+    
+    @FXML
+    private CheckBox ckSegunda;
+    
+    @FXML
+    private CheckBox ckTerca;
+
+    @FXML
+    private CheckBox ckQuarta;
+
+    @FXML
+    private CheckBox ckQuinta;
+
+    @FXML
+    private CheckBox ckSexta;
+
+    @FXML
+    private RadioButton manha;
+    
+    @FXML
+    private RadioButton tarde;
+    
+    @FXML
+    private RadioButton noite;
+    
 
     @FXML
     public void clickCancelaProf() throws Exception{
@@ -107,9 +136,11 @@ public class CadProfessorController {
 
     @FXML
     void clickSalvaProf(ActionEvent event) throws Exception {
-    	Date a = new Date(); //Tem problema nessa variavel disponibildade aaaa 
-    	Professor p = new Professor(tfCpfProf.getText(), tfNomeProf.getText(), tfEmailProf.getText(), sctConhecimentoProf.getPromptText(), tfTelProf.getText(), tfMatProf.getText(), a, tfDescProf.getText());
+    	Disponibilidade d = new Disponibilidade(tfCpfProf.getText(), "",ckSegunda.isSelected(), ckTerca.isSelected(), ckQuarta.isSelected(), ckQuinta.isSelected(), ckSexta.isSelected(), manha.isSelected(), tarde.isSelected(), noite.isSelected());
+    	System.out.println(d.getCPF());
+    	Professor p = new Professor(tfCpfProf.getText(), tfNomeProf.getText(), tfEmailProf.getText(), sctConhecimentoProf.getPromptText(), tfTelProf.getText(), tfMatProf.getText(), "");
     	save(p);
+    	AulaDAO.save_disp(d);
     	sceneChange("sceneListProf");
     }
 

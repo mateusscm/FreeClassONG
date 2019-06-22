@@ -32,7 +32,6 @@ public class AlunoDAO {
 	            aluno.setNivelConhecimento(result.getString(index.nextIndex()));
 	            aluno.setTelefone(result.getString(index.nextIndex()));
 	            aluno.setMateria(result.getString(index.nextIndex()));
-	            aluno.setDisponibilidade(result.getDate(index.nextIndex()));
 	            aluno.setDescricao(result.getString(index.nextIndex()));
 	            aluno_list.add(aluno); 
 	         }
@@ -78,12 +77,12 @@ public class AlunoDAO {
 			IndexFactory index = IndexFactory.newInstance(1, 8);
 			String sql;
 			if(getByCpf(aluno.getCpf()) == null) {
-				sql = "INSERT INTO Aluno VALUES (?,?,?,?,?,?,?,?);";
+				sql = "INSERT INTO Aluno VALUES (?,?,?,?,?,?,?);";
 				statement = connection.prepareStatement(sql);
 				statement.setString(index.nextIndex(), aluno.getCpf());
 				statement = setCommonValuesInStatement(sql, statement, aluno, index);
 			} else {
-				sql = "UPDATE Aluno SET nome = ?,email = ?,nivelConhecimento = ?,telefone = ?,materia = ?,disponibilidade = ?,descricao = ? WHERE cpf = ?;";	
+				sql = "UPDATE Aluno SET nome = ?,email = ?,nivelConhecimento = ?,telefone = ?,materia = ?,descricao = ? WHERE cpf = ?;";	
 				statement = connection.prepareStatement(sql);
 				statement = setCommonValuesInStatement(sql, statement, aluno, index);
 				statement.setString(index.nextIndex(), aluno.getCpf());
@@ -105,7 +104,6 @@ public class AlunoDAO {
 		statement.setString(index.nextIndex(), aluno.getNivelConhecimento());
 		statement.setString(index.nextIndex(), aluno.getTelefone());
 		statement.setString(index.nextIndex(), aluno.getMateria());
-		statement.setDate(index.nextIndex(), DateUtil.convertJavaDateToSQL(aluno.getDisponibilidade()));
 		statement.setString(index.nextIndex(), aluno.getDescricao());
 		return statement;
 	}
@@ -130,7 +128,6 @@ public class AlunoDAO {
 	            aluno.setNivelConhecimento(result.getString(index.nextIndex()));
 	            aluno.setTelefone(result.getString(index.nextIndex()));
 	            aluno.setMateria(result.getString(index.nextIndex()));
-	            aluno.setDisponibilidade(result.getDate(index.nextIndex()));
 	            aluno.setDescricao(result.getString(index.nextIndex()));
 	         }
 			connection.commit();

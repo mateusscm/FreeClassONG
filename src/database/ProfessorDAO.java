@@ -32,7 +32,6 @@ public class ProfessorDAO {
 	            professor.setNivelConhecimento(result.getString(index.nextIndex()));
 	            professor.setTelefone(result.getString(index.nextIndex()));
 	            professor.setMateria(result.getString(index.nextIndex()));
-	            professor.setDisponibilidade(result.getDate(index.nextIndex()));
 	            professor.setDescricao(result.getString(index.nextIndex()));
 	            professor_list.add(professor); 
 	         }
@@ -77,12 +76,12 @@ public class ProfessorDAO {
 			IndexFactory index = IndexFactory.newInstance(1, 8);
 			String sql;
 			if(getByCpf(professor.getCpf()) == null) {
-				sql = "INSERT INTO Professor VALUES (?,?,?,?,?,?,?,?);";
+				sql = "INSERT INTO Professor VALUES (?,?,?,?,?,?,?);";
 				statement = connection.prepareStatement(sql);
 				statement.setString(index.nextIndex(), professor.getCpf());
 				statement = setCommonValuesInStatement(sql, statement, professor, index);
 			} else {
-				sql = "UPDATE Professor SET nome = ?,email = ?,nivelConhecimento = ?,telefone = ?,materia = ?,disponibilidade = ?,descricao = ? WHERE cpf = ?;";	
+				sql = "UPDATE Professor SET nome = ?,email = ?,nivelConhecimento = ?,telefone = ?,materia = ?,descricao = ? WHERE cpf = ?;";	
 				statement = connection.prepareStatement(sql);
 				statement = setCommonValuesInStatement(sql, statement, professor, index);
 				statement.setString(index.nextIndex(), professor.getCpf());
@@ -104,7 +103,6 @@ public class ProfessorDAO {
 		statement.setString(index.nextIndex(), professor.getNivelConhecimento());
 		statement.setString(index.nextIndex(), professor.getTelefone());
 		statement.setString(index.nextIndex(), professor.getMateria());
-		statement.setDate(index.nextIndex(), DateUtil.convertJavaDateToSQL(professor.getDisponibilidade()));
 		statement.setString(index.nextIndex(), professor.getDescricao());
 		return statement;
 	}
@@ -129,7 +127,6 @@ public class ProfessorDAO {
 	            professor.setNivelConhecimento(result.getString(index.nextIndex()));
 	            professor.setTelefone(result.getString(index.nextIndex()));
 	            professor.setMateria(result.getString(index.nextIndex()));
-	            professor.setDisponibilidade(result.getDate(index.nextIndex()));
 	            professor.setDescricao(result.getString(index.nextIndex()));
 	         }
 			connection.commit();
