@@ -9,6 +9,7 @@ import java.util.Date;
 
 import application.Aula;
 import application.Disponibilidade;
+import application.Professor;
 import util.DateUtil;
 import util.IndexFactory;
 public class AulaDAO {
@@ -18,7 +19,7 @@ public class AulaDAO {
 			try {
 				PreparedStatement statement;
 				connection = DBManager.getConnection();
-				String sql = "SELECT * FROM Turmas;";
+				String sql = "SELECT * FROM Turma;";
 				statement = connection.prepareStatement(sql); 
 				ResultSet result = statement.executeQuery();
 				IndexFactory index = null;
@@ -43,7 +44,7 @@ public class AulaDAO {
 			try {
 				PreparedStatement statement;
 				connection = DBManager.getConnection();
-				String sql = "SELECT * FROM Turmas;"; //Sei que poderia usar count, vou mudar jaja, foi mal deus o java
+				String sql = "SELECT * FROM Turma;"; //Sei que poderia usar count, vou mudar jaja, foi mal deus o java
 				statement = connection.prepareStatement(sql); 
 				ResultSet result = statement.executeQuery();
 				while(result.next()){
@@ -65,15 +66,14 @@ public class AulaDAO {
 			try {
 				PreparedStatement statement;
 				connection = DBManager.getConnection();
-				IndexFactory index = IndexFactory.newInstance(1, 8);
+				IndexFactory index = IndexFactory.newInstance(1, 6);
 				String sql;
 				if(getById(aula.getId_aula()) == null) {
-					sql = "INSERT INTO Turmas VALUES (?,?,?,?,?);";
+					sql = "INSERT INTO Turma VALUES (?,?,?,?,?,?);";
 					statement = connection.prepareStatement(sql);
-					statement.setString(index.nextIndex(), Integer.toString(aula.getId_aula()));
 					statement = setCommonValuesInStatement(sql, statement, aula, index);
 				} else {
-					sql = "UPDATE Turmas SET codigo = ?,cpf_prof = ?,materia = ?,dia_da_semana = ?,hora = ?,max_alunos = ?, min_alunos = ? WHERE cpf = ?;";	
+					sql = "UPDATE Turma SET cpf_prof = ?,codigo = ?,dia_da_semana = ?,hora = ?,max_alunos = ?, min_alunos = ? WHERE codigo = ?;";	
 					statement = connection.prepareStatement(sql);
 					statement = setCommonValuesInStatement(sql, statement, aula, index);
 					statement.setString(index.nextIndex(), Integer.toString(aula.getId_aula()));
@@ -90,12 +90,12 @@ public class AulaDAO {
 		}
 		
 		private static PreparedStatement setCommonValuesInStatement(String sql, PreparedStatement statement, Aula a, IndexFactory index) throws IndexOutOfBoundsException, SQLException {
-			statement.setString(index.nextIndex(), a.getCpf_professor());
 			statement.setString(index.nextIndex(), Integer.toString(a.getId_aula()));
-			statement.setString(index.nextIndex(), a.getMateria());
+			statement.setString(index.nextIndex(), a.getCpf_professor());
 			statement.setString(index.nextIndex(), a.getDia_semana());
-			statement.setString(index.nextIndex(), Integer.toString(a.getHora()));
-			//ADICIONAR ALUNO EM CADA TURMA MDS TEM MTA COIsA
+			statement.setInt(index.nextIndex(), a.getMax_alunos());
+			statement.setInt(index.nextIndex(), a.getMin_alunos());
+			statement.setString(index.nextIndex(), a.getHora());
 			return statement;
 		}
 		
@@ -105,7 +105,7 @@ public class AulaDAO {
 			try {
 				PreparedStatement statement;
 				connection = DBManager.getConnection();
-				String sql = "SELECT * FROM Turmas WHERE id = ?;";
+				String sql = "SELECT * FROM Turma WHERE codigo = ?;";
 				statement = connection.prepareStatement(sql); 
 				statement.setString(1, Integer.toString(id));
 				ResultSet result = statement.executeQuery();
@@ -133,7 +133,7 @@ public class AulaDAO {
 			try {
 				PreparedStatement statement;
 				connection = DBManager.getConnection();
-				String sql = "DELETE FROM Turmas WHERE id = ?;";
+				String sql = "DELETE FROM Turma WHERE codigo = ?;";
 				statement = connection.prepareStatement(sql);
 				statement.setString(1, Integer.toString(id));
 				statement.execute();
@@ -147,47 +147,6 @@ public class AulaDAO {
 			
 		}
 		
-		public Date getLogDate() throws SQLException {
-			Date _date = null;
-			Connection connection = null;
-			try {				
-				PreparedStatement statement;
-				connection = DBManager.getConnection();
-				String sql = "SELECT * FROM ClassLog;";
-				statement = connection.prepareStatement(sql); ResultSet result = statement.executeQuery();
-				IndexFactory index = null;
-				while(result.next()){
-					_date = new SimpleDateFormat("dd/MM/yyyy").parse(result.getString(index.nextIndex()));
-					//ADICIONAR DISPONIBILIDADE AQUI
-		         }
-				connection.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(connection != null)
-					connection.close();
-			}
-			return _date;
-			
-		}
-		public void setLogDate(Date date) throws SQLException {
-			Connection connection = null;
-			try {				
-				PreparedStatement statement;
-				connection = DBManager.getConnection();
-				String sql = "UPDATE ClassLog SET date = ?;";
-				statement = connection.prepareStatement(sql);
-				statement.setDate(1, DateUtil.convertJavaDateToSQL(date));
-				statement.executeQuery();
-				connection.commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(connection != null)
-					connection.close();
-			}
-			
-		}
 		
 		public static void save_disp(Disponibilidade d) throws SQLException {
 			Connection connection = null;

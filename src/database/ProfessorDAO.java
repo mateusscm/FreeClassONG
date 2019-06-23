@@ -7,12 +7,61 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import application.Aula;
 import application.Professor;
 import util.DateUtil;
 import util.IndexFactory;
 
 public class ProfessorDAO {
-
+	public static String getFirst(String day, String period) throws SQLException {
+		String p = null;
+		Connection connection = null;
+		try {
+			PreparedStatement statement;
+			connection = DBManager.getConnection(); //NAO SABIA Q EU SABIA SQL, OLHA ESA QUERY QUE LINDA
+			String sql = "SELECT p.cpf FROM (disponibilidadep d INNER JOIN professor p ON  d.cpf_prof = p.cpf) LEFT JOIN turma t ON p.cpf = t.cpf_prof WHERE t.cpf_prof IS NULL AND d."+period+" = TRUE AND d."+day+" = TRUE;";
+			statement = connection.prepareStatement(sql); 
+			ResultSet result = statement.executeQuery();
+			IndexFactory index = null;
+			while(result.next()){
+				index = IndexFactory.newInstance(1, 1);
+				p = result.getString(index.nextIndex());
+	            break;
+	         }
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null)
+				connection.close();
+		}
+		
+		return p;
+	}
+	
+	public static ArrayList<String> getNotInClass() throws SQLException {
+		ArrayList<String> professor_list = new ArrayList<String>();
+		Connection connection = null;
+		try {
+			PreparedStatement statement;
+			connection = DBManager.getConnection();
+			String sql = "SELECT p.cpf FROM professor p LEFT JOIN turma t on p.cpf = t.cpf_prof WHERE t.cpf_prof IS NULL;";
+			statement = connection.prepareStatement(sql); 
+			ResultSet result = statement.executeQuery();
+			IndexFactory index = null;
+			while(result.next()){
+				index = IndexFactory.newInstance(1, 1);
+	            professor_list.add(result.getString(index.nextIndex())); 
+	         }
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null)
+				connection.close();
+		}
+		return professor_list;
+	}
 	public static ArrayList<Professor> getAll() throws SQLException {
 		ArrayList<Professor> professor_list = new ArrayList<Professor>();
 		Connection connection = null;

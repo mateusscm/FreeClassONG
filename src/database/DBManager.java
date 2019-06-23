@@ -50,11 +50,10 @@ public class DBManager {
 			String createTurma = "CREATE TABLE Turma(" + 
 					"codigo int PRIMARY KEY," + 
 					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf)," + 
-					"materia VARCHAR(20)," +
 					"dia_da_semana VARCHAR(20)," +
 					"max_alunos int DEFAULT 40," +
 					"min_alunos int DEFAULT 20," +
-					"hora int);";
+					"hora VARCHAR(20));";
 			String createAlunoInTurma = "CREATE TABLE AlunoInTurma(" + 
 					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf)PRIMARY KEY," + 
 					"cod_turma int FOREIGN KEY REFERENCES turma(codigo));";
@@ -78,9 +77,7 @@ public class DBManager {
 					"manha Boolean DEFAULT 0," +
 					"tarde Boolean DEFAULT 0," +
 					"noite Boolean DEFAULT 0);";
-			String createClassLog = "CREATE TABLE ClassLog(" + 
-					"date DATE);";
-			statement.executeUpdate(createProfessor + createAluno + createDisponibilidade1 + createDisponibilidade2 +createTurma + createAlunoInTurma  + createClassLog);
+			statement.executeUpdate(createProfessor + createAluno + createDisponibilidade1 + createDisponibilidade2 +createTurma + createAlunoInTurma);
 
 		}  catch (Exception e) {
 			e.printStackTrace(System.out);

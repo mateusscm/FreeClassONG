@@ -12,7 +12,30 @@ import util.DateUtil;
 import util.IndexFactory;
 
 public class AlunoDAO {
-
+	public static ArrayList<String> getNotInClass() throws SQLException {
+		ArrayList<String> aluno_list = new ArrayList<String>();
+		Connection connection = null;
+		try {
+			PreparedStatement statement;
+			connection = DBManager.getConnection();
+			String sql = "SELECT p.cpf FROM Aluno p LEFT JOIN AlunoInTurma t on p.cpf = t.cpf_aluno WHERE t.cpf_aluno IS NULL;";
+			statement = connection.prepareStatement(sql); 
+			ResultSet result = statement.executeQuery();
+			IndexFactory index = null;
+			while(result.next()){
+				index = IndexFactory.newInstance(1, 1);
+	            aluno_list.add(result.getString(index.nextIndex())); 
+	         }
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null)
+				connection.close();
+		}
+		return aluno_list;
+	}
+	
 	public static ArrayList<Aluno> getAll() throws SQLException {
 		ArrayList<Aluno> aluno_list = new ArrayList<Aluno>();
 		Connection connection = null;

@@ -1,5 +1,5 @@
 package controller;
-
+import util.ClassCreator;
 import static application.Main.sceneChange;
 import static database.AlunoDAO.getCountAluno;
 import static database.ProfessorDAO.getCountProfessor;
@@ -15,9 +15,10 @@ import javafx.scene.layout.AnchorPane;
 
 public class HomeController {
 
-	public void initialize() throws SQLException {
+	public void initialize() throws Exception {
 		lblNroProf.setText(Integer.toString(getCountProfessor()));
 		lblNroAlunos.setText(Integer.toString(getCountAluno()));
+		ClassCreator.create();
 	}
 	
     @FXML
