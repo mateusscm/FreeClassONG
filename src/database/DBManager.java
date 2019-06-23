@@ -55,10 +55,10 @@ public class DBManager {
 					"min_alunos int DEFAULT 20," +
 					"hora VARCHAR(20));";
 			String createAlunoInTurma = "CREATE TABLE AlunoInTurma(" + 
-					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf)PRIMARY KEY," + 
-					"cod_turma int FOREIGN KEY REFERENCES turma(codigo));";
+					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf) ON DELETE CASCADE PRIMARY KEY," + 
+					"cod_turma int FOREIGN KEY REFERENCES turma(codigo) ON DELETE CASCADE);";
 			String createDisponibilidade1 = "CREATE TABLE DisponibilidadeP(" + 
-					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf)," + 
+					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf) ON DELETE CASCADE," + 
 					"seg Boolean DEFAULT 0," +
 					"ter Boolean DEFAULT 0," +
 					"qua Boolean DEFAULT 0," +
@@ -68,7 +68,7 @@ public class DBManager {
 					"tarde Boolean DEFAULT 0," +
 					"noite Boolean DEFAULT 0);";
 			String createDisponibilidade2 = "CREATE TABLE DisponibilidadeA(" + 
-					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf)," + 
+					"cpf_aluno VARCHAR(20) FOREIGN KEY REFERENCES aluno(cpf) ON DELETE CASCADE," + 
 					"seg Boolean DEFAULT 0," +
 					"ter Boolean DEFAULT 0," +
 					"qua Boolean DEFAULT 0," +

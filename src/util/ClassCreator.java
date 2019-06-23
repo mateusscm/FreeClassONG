@@ -23,14 +23,18 @@ public class ClassCreator {
 		for (int i = 0; i < day.length; i++) {
 			for (int j = 0; j < period.length; j++) {
 				//Pega o 1o professor que esta disponivel no dia/periodo da iteracao e cria uma turma com ele
-//					professor_list.add(ProfessorDAO.getFirst(day[i], period[j]));
 				String p = ProfessorDAO.getFirst(day[i], period[j]);
 				if (p != null) {
-					Aula a = new Aula(ProfessorDAO.getFirst(day[i], period[j]), i+j, day[i], period[j]);
+					Aula a = new Aula(ProfessorDAO.getFirst(day[i], period[j]), i+j, day[i], period[j]); //ID PRECISA DE AUTOINCREMENT JAJA
 					AulaDAO.save(a);
+					add_alunos(a, day[i], period[j]);
 				}
 			}
 		}
 		
+	}
+	
+	public static void add_alunos(Aula a, String day, String period) throws Exception {
+		AlunoDAO.add_in_class(AlunoDAO.getNotInClass(day, period, a), a);
 	}
 }
