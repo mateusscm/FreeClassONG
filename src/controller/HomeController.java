@@ -1,6 +1,7 @@
 package controller;
 import util.ClassCreator;
 import static application.Main.sceneChange;
+import static database.AulaDAO.getCountAula;
 import static database.AlunoDAO.getCountAluno;
 import static database.ProfessorDAO.getCountProfessor;
 
@@ -19,6 +20,7 @@ public class HomeController {
 		lblNroProf.setText(Integer.toString(getCountProfessor()));
 		lblNroAlunos.setText(Integer.toString(getCountAluno()));
 		ClassCreator.create();
+		lblNroAulas.setText(Integer.toString(getCountAula()));
 	}
 	
     @FXML

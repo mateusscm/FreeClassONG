@@ -25,16 +25,17 @@ public class ClassCreator {
 				//Pega o 1o professor que esta disponivel no dia/periodo da iteracao e cria uma turma com ele
 				String p = ProfessorDAO.getFirst(day[i], period[j]);
 				if (p != null) {
-					Aula a = new Aula(ProfessorDAO.getFirst(day[i], period[j]), i+j, day[i], period[j]); //ID PRECISA DE AUTOINCREMENT JAJA
+					String cpf = ProfessorDAO.getFirst(day[i], period[j]);
+					Aula a = new Aula(cpf, i+j, day[i], period[j]);
 					AulaDAO.save(a);
-					add_alunos(a, day[i], period[j]);
+					add_alunos(a, day[i], period[j], cpf);
 				}
 			}
 		}
 		
 	}
 	
-	public static void add_alunos(Aula a, String day, String period) throws Exception {
-		AlunoDAO.add_in_class(AlunoDAO.getNotInClass(day, period, a), a);
+	public static void add_alunos(Aula a, String day, String period, String cpf) throws Exception {
+		AlunoDAO.add_in_class(AlunoDAO.getNotInClass(day, period, a), AulaDAO.getByCpf(cpf));
 	}
 }

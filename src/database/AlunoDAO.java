@@ -15,7 +15,7 @@ import util.IndexFactory;
 
 public class AlunoDAO {
 	
-	public static void add_in_class (ArrayList<String> cpfs, Aula a) throws SQLException {
+	public static void add_in_class (ArrayList<String> cpfs, String a) throws SQLException {
 		Connection connection = null;
 		try {
 			PreparedStatement statement;
@@ -28,9 +28,8 @@ public class AlunoDAO {
 					IndexFactory index = IndexFactory.newInstance(1, 2);
 					sql = "INSERT INTO Alunointurma VALUES (?,?);";
 					statement = connection.prepareStatement(sql);
-					System.out.println(cpfs);
 					statement.setString(index.nextIndex(), cpf);
-					statement.setString(index.nextIndex(), Integer.toString(a.getId_aula()));
+					statement.setString(index.nextIndex(), a);
 					statement.execute();
 				}
 			}
@@ -42,6 +41,35 @@ public class AlunoDAO {
 			if(connection != null)
 				connection.close();
 		}
+	}
+	public static ArrayList<Aluno> getInClass(int id) throws SQLException {
+		ArrayList<Aluno> aluno_list = new ArrayList<Aluno>();
+		Connection connection = null;
+		try {
+			PreparedStatement statement;
+			connection = DBManager.getConnection();
+			String sql = "SELECT a.nome, a.email, a.telefone, a.cpf FROM aluno a inner JOIN alunointurma t ON a.cpf = t.cpf_aluno WHERE t.cod_turma = ?;";
+			statement = connection.prepareStatement(sql); 
+			statement.setInt(1, id);
+			ResultSet result = statement.executeQuery();
+			IndexFactory index = null;
+			while(result.next()){
+				index = IndexFactory.newInstance(1, 4);
+				Aluno a = new Aluno();
+				a.setNome(result.getString(index.nextIndex()));
+				a.setEmail(result.getString(index.nextIndex()));
+				a.setTelefone(result.getString(index.nextIndex()));
+				a.setCpf(result.getString(index.nextIndex()));
+	            aluno_list.add(a); 
+	         }
+			connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null)
+				connection.close();
+		}
+		return aluno_list;
 	}
 	
 	public static String getByCpfInTurma(String cpf) throws SQLException {

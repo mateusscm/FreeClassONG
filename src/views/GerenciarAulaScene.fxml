@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarAulaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarAulaController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
          <children>
@@ -92,7 +100,7 @@
                <children>
                   <TabPane layoutX="25.0" layoutY="23.0" prefHeight="251.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab fx:id="tab1" text="Aula 1">
+                      <Tab fx:id="tab1" text="Manha">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3;">
                                  <children>
@@ -101,63 +109,35 @@
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" text="Matéria:">
+                                    <Label layoutX="14.0" layoutY="38.0" text="Horario:">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="90.0" text="Nível:">
+                                    <Label fx:id="lblProf1" layoutX="87.0" layoutY="15.0" text="...">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="65.0" text="Horario:">
+                                    <Label fx:id="lblHorario1" layoutX="74.0" layoutY="38.0" text="...">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblProf" layoutX="87.0" layoutY="15.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblMat" layoutX="74.0" layoutY="40.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblHorario" layoutX="74.0" layoutY="65.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblNivel" layoutX="61.0" layoutY="90.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;">
-                                       <children>
-                                          <Button fx:id="btnEdit" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: #000;" text="Editar" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana" size="20.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                    </Pane>
+                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;" />
                                     <TableView fx:id="tbAluno" layoutX="223.0" layoutY="9.0" prefHeight="205.0" prefWidth="414.0">
                                       <columns>
-                                        <TableColumn fx:id="colAluno" prefWidth="102.0" text="Aluno" />
-                                        <TableColumn fx:id="colCpf" prefWidth="110.0" text="CPF" />
-                                          <TableColumn fx:id="colEmail" prefWidth="114.0" text="Email" />
-                                          <TableColumn fx:id="colTel" prefWidth="87.0" text="Telefone" />
+                                        <TableColumn fx:id="colAluno1" prefWidth="102.0" text="Aluno" />
+                                        <TableColumn fx:id="colCpf1" prefWidth="110.0" text="CPF" />
+                                          <TableColumn fx:id="colEmail1" prefWidth="114.0" text="Email" />
+                                          <TableColumn fx:id="colTel1" prefWidth="87.0" text="Telefone" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                         </content>
                       </Tab>
-                        <Tab fx:id="tab2" text="Aula 2">
+                        <Tab fx:id="tab2" text="Tarde">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3;">
                                  <children>
@@ -166,63 +146,35 @@
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" text="Matéria:">
+                                    <Label layoutX="14.0" layoutY="38.0" text="Horario:">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="90.0" text="Nível:">
+                                    <Label fx:id="lblProf2" layoutX="87.0" layoutY="15.0" text="...">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="65.0" text="Horario:">
+                                    <Label fx:id="lblHorario2" layoutX="74.0" layoutY="38.0" text="...">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblProf" layoutX="87.0" layoutY="15.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblMat" layoutX="74.0" layoutY="40.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblHorario" layoutX="74.0" layoutY="65.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblNivel" layoutX="61.0" layoutY="90.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;">
-                                       <children>
-                                          <Button fx:id="btnEdit1" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: #000;" text="Editar" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana" size="20.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                    </Pane>
+                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;" />
                                     <TableView fx:id="tbAluno1" layoutX="223.0" layoutY="9.0" prefHeight="205.0" prefWidth="414.0">
                                        <columns>
-                                          <TableColumn fx:id="colAluno" prefWidth="102.0" text="Aluno" />
-                                          <TableColumn fx:id="colCpf" prefWidth="110.0" text="CPF" />
-                                          <TableColumn fx:id="colEmail" prefWidth="114.0" text="Email" />
-                                          <TableColumn fx:id="colTel" prefWidth="87.0" text="Telefone" />
+                                          <TableColumn fx:id="colAluno2" prefWidth="102.0" text="Aluno" />
+                                          <TableColumn fx:id="colCpf2" prefWidth="110.0" text="CPF" />
+                                          <TableColumn fx:id="colEmail2" prefWidth="114.0" text="Email" />
+                                          <TableColumn fx:id="colTel2" prefWidth="87.0" text="Telefone" />
                                        </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="tab3" text="Aula 3">
+                        <Tab fx:id="tab3" text="Noite">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3;">
                                  <children>
@@ -231,186 +183,28 @@
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" text="Matéria:">
+                                    <Label layoutX="14.0" layoutY="38.0" text="Horario:">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="90.0" text="Nível:">
+                                    <Label fx:id="lblProf3" layoutX="87.0" layoutY="15.0" text="...">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="14.0" layoutY="65.0" text="Horario:">
+                                    <Label fx:id="lblHorario3" layoutX="74.0" layoutY="38.0" text="...">
                                        <font>
                                           <Font name="Verdana" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblProf" layoutX="87.0" layoutY="15.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblMat" layoutX="74.0" layoutY="40.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblHorario" layoutX="74.0" layoutY="65.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblNivel" layoutX="61.0" layoutY="90.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;">
-                                       <children>
-                                          <Button fx:id="btnEdit" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: #000;" text="Editar" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana" size="20.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                    </Pane>
+                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;" />
                                     <TableView fx:id="tbAluno11" layoutX="223.0" layoutY="9.0" prefHeight="205.0" prefWidth="414.0">
                                        <columns>
-                                          <TableColumn fx:id="colAluno" prefWidth="102.0" text="Aluno" />
-                                          <TableColumn fx:id="colCpf" prefWidth="110.0" text="CPF" />
-                                          <TableColumn fx:id="colEmail" prefWidth="114.0" text="Email" />
-                                          <TableColumn fx:id="colTel" prefWidth="87.0" text="Telefone" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab fx:id="tab4" text="Aula 4">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3;">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="15.0" text="Professor:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" text="Matéria:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="90.0" text="Nível:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="65.0" text="Horario:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblProf" layoutX="87.0" layoutY="15.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblMat" layoutX="74.0" layoutY="40.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblHorario" layoutX="74.0" layoutY="65.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblNivel" layoutX="61.0" layoutY="90.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;">
-                                       <children>
-                                          <Button fx:id="btnEdit" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: #000;" text="Editar" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana" size="20.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                    </Pane>
-                                    <TableView fx:id="tbAluno111" layoutX="223.0" layoutY="9.0" prefHeight="205.0" prefWidth="414.0">
-                                       <columns>
-                                          <TableColumn fx:id="colAluno" prefWidth="102.0" text="Aluno" />
-                                          <TableColumn fx:id="colCpf" prefWidth="110.0" text="CPF" />
-                                          <TableColumn fx:id="colEmail" prefWidth="114.0" text="Email" />
-                                          <TableColumn fx:id="colTel" prefWidth="87.0" text="Telefone" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab fx:id="tab5" text="Aula 5">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3;">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="15.0" text="Professor:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="40.0" text="Matéria:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="90.0" text="Nível:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="14.0" layoutY="65.0" text="Horario:">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblProf" layoutX="87.0" layoutY="15.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblMat" layoutX="74.0" layoutY="40.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblHorario" layoutX="74.0" layoutY="65.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblNivel" layoutX="61.0" layoutY="90.0" text="...">
-                                       <font>
-                                          <Font name="Verdana" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Pane layoutX="-3.0" layoutY="115.0" prefHeight="107.0" prefWidth="653.0" style="-fx-background-color: #c9c9c9;">
-                                       <children>
-                                          <Button fx:id="btnEdit" layoutX="70.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: #000;" text="Editar" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana" size="20.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                    </Pane>
-                                    <TableView fx:id="tbAluno1111" layoutX="223.0" layoutY="9.0" prefHeight="205.0" prefWidth="414.0">
-                                       <columns>
-                                          <TableColumn fx:id="colAluno" prefWidth="102.0" text="Aluno" />
-                                          <TableColumn fx:id="colCpf" prefWidth="110.0" text="CPF" />
-                                          <TableColumn fx:id="colEmail" prefWidth="114.0" text="Email" />
-                                          <TableColumn fx:id="colTel" prefWidth="87.0" text="Telefone" />
+                                          <TableColumn fx:id="colAluno3" prefWidth="102.0" text="Aluno" />
+                                          <TableColumn fx:id="colCpf3" prefWidth="110.0" text="CPF" />
+                                          <TableColumn fx:id="colEmail3" prefWidth="114.0" text="Email" />
+                                          <TableColumn fx:id="colTel3" prefWidth="87.0" text="Telefone" />
                                        </columns>
                                     </TableView>
                                  </children>

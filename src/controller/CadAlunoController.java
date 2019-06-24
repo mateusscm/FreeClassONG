@@ -29,7 +29,7 @@ public class CadAlunoController {
 			tfCpfAluno.setText(aluno.getCpf());
 			tfNomeAluno.setText(aluno.getNome());
 			tfEmailAluno.setText(aluno.getEmail());
-			tfDescAluno.setText(aluno.getDescricao());
+//			tfDescAluno.setText(aluno.getDescricao());
 			tfTelAluno.setText(aluno.getTelefone());
 			tfMatAluno.setText(aluno.getMateria());
 		}		

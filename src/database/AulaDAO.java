@@ -69,7 +69,7 @@ public class AulaDAO {
 				IndexFactory index = IndexFactory.newInstance(1, 6);
 				String sql;
 				if(getById(aula.getId_aula()) == null) {
-					sql = "INSERT INTO Turma VALUES (?,?,?,?,?,?);";
+					sql = "INSERT INTO Turma (cpf_prof, dia_da_semana, max_alunos, min_alunos, hora) VALUES (?,?,?,?,?);";
 					statement = connection.prepareStatement(sql);
 					statement = setCommonValuesInStatement(sql, statement, aula, index);
 				} else {
@@ -90,7 +90,6 @@ public class AulaDAO {
 		}
 		
 		private static PreparedStatement setCommonValuesInStatement(String sql, PreparedStatement statement, Aula a, IndexFactory index) throws IndexOutOfBoundsException, SQLException {
-			statement.setString(index.nextIndex(), Integer.toString(a.getId_aula()));
 			statement.setString(index.nextIndex(), a.getCpf_professor());
 			statement.setString(index.nextIndex(), a.getDia_semana());
 			statement.setInt(index.nextIndex(), a.getMax_alunos());
@@ -127,6 +126,65 @@ public class AulaDAO {
 			}
 			return aula;
 		}
+		public static String getByCpf(String cpf) throws SQLException {
+			Connection connection = null;
+			Aula aula = null;
+			try {
+				PreparedStatement statement;
+				connection = DBManager.getConnection();
+				String sql = "SELECT * FROM Turma WHERE cpf_prof = ?;";
+				statement = connection.prepareStatement(sql); 
+				statement.setString(1, cpf);
+				ResultSet result = statement.executeQuery();
+				IndexFactory index = null;
+				while(result.next()){
+					index = IndexFactory.newInstance(1, 8);
+					aula = new Aula();
+					aula.setId_aula(Integer.parseInt(result.getString(index.nextIndex())));
+		         }
+				connection.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(connection != null)
+					connection.close();
+			}
+			return Integer.toString(aula.getId_aula());
+		}
+		
+		public static ArrayList<Aula> getByDate(String day) throws SQLException {
+			Aula aula = null;
+			ArrayList<Aula> a = new ArrayList<Aula>();
+			Connection connection = null;
+			try {
+				PreparedStatement statement;
+				connection = DBManager.getConnection();
+				String sql = "SELECT * FROM Turma WHERE dia_da_semana = ?;";
+				statement = connection.prepareStatement(sql); 
+				statement.setString(1, day);
+				ResultSet result = statement.executeQuery();
+				IndexFactory index = null;
+				while(result.next()){
+					index = IndexFactory.newInstance(1, 6);
+					aula = new Aula();
+					aula.setId_aula(Integer.parseInt(result.getString(index.nextIndex())));
+					aula.setCpf_professor(result.getString(index.nextIndex()));
+					aula.setDia_semana(result.getString(index.nextIndex()));
+					aula.setMax_alunos(result.getInt(index.nextIndex()));
+					aula.setMin_alunos(result.getInt(index.nextIndex()));
+					aula.setHora(result.getString(index.nextIndex()));
+					a.add(aula);
+		         }
+				connection.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(connection != null)
+					connection.close();
+			}
+			return a;
+		}
+		
 		
 		public static void delete(int id) throws SQLException {
 			Connection connection = null;

@@ -48,8 +48,8 @@ public class DBManager {
 					"descricao VARCHAR(255)" + 
 					");";
 			String createTurma = "CREATE TABLE Turma(" + 
-					"codigo int PRIMARY KEY," + 
-					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf)," + 
+					"codigo int IDENTITY PRIMARY KEY," + 
+					"cpf_prof VARCHAR(20) FOREIGN KEY REFERENCES professor(cpf) ON DELETE CASCADE," + 
 					"dia_da_semana VARCHAR(20)," +
 					"max_alunos int DEFAULT 40," +
 					"min_alunos int DEFAULT 20," +
